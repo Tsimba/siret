@@ -12,6 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
+/**
+ * Class Controller for Siret
+ *
+ * @author  Nicolas Razanatsimba
+ * @version 1.0
+ * @since   2023-01-13
+ */
 @RestController
 @Slf4j
 @RequestMapping("/siret")
@@ -25,11 +32,23 @@ public class SiretController implements HealthIndicator {
     }
 
 
+    /**
+     * Method to Get Siret Infos
+     * @param idSiret
+     *
+     * @return
+     */
     @GetMapping(path = "/get/api")
-    private void getSiretInfos(){
-       this.siretService.getSiretInfosAndStore();
+    private void getSiretInfos(@RequestBody String idSiret){
+       this.siretService.getSiretInfosAndStore(idSiret);
     }
 
+    /**
+     * Method to Save Siret
+     * @param siretDTO
+     *
+     * @return SiretDTO
+     */
     @PostMapping(path = "/siret/create")
     private SiretDTO saveSiret(@RequestBody SiretDTO siretDTO){
         try{
@@ -46,6 +65,12 @@ public class SiretController implements HealthIndicator {
         }
     }
 
+    /**
+     * Method to Save List of Siret
+     * @param siretDTOList
+     *
+     * @return List<siretDTO>
+     */
     @PostMapping(path = "/siret/create/list")
     private List<SiretDTO> saveListSiret(@RequestBody List<SiretDTO> siretDTOList){
         try{

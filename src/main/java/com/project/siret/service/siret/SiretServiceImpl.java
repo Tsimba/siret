@@ -9,12 +9,16 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * Class for Service of Siret
+ *
+ * @author  Nicolas Razanatsimba
+ * @version 1.0
+ * @since   2023-01-13
+ */
 @Service
 public class SiretServiceImpl implements  SiretService{
 
@@ -26,31 +30,36 @@ public class SiretServiceImpl implements  SiretService{
     }
 
 
+    /**
+     * Method to save siret
+     * @param siret
+     *
+     * @return Siret
+     */
     @Override
     public Siret create(Siret siret) {
         return this.siretReposotory.save(siret);
     }
 
+    /**
+     * Method to save List siret
+     * @param siretList
+     *
+     * @return List Siret
+     */
     @Override
     public List<Siret> saveListSiret(List<Siret> siretList) {
         return this.siretReposotory.saveAll(siretList);
     }
 
+    /**
+     * Method to get Siret Infos
+     * @param idSiret
+     *
+     * @return
+     */
     @Override
-    public void getSiretInfosAndStore() {
-        List<String> siretIdList = new ArrayList<>();
-        siretIdList.add("31302979500017");
-        siretIdList.add("41339442000033");
-        siretIdList.add("41339442000090");
-        siretIdList.add("41339442000116");
-        siretIdList.add("41776304200013");
-        siretIdList.add("43438147100011");
-        siretIdList.add("45251723800013");
-        siretIdList.add("52170053400014");
-        siretIdList.add("75254783600011");
-        siretIdList.add("47962817400042");
-        siretIdList.add("97080195700014");
-
+    public void getSiretInfosAndStore(String idSiret) {
         String uri = "https://api.insee.fr/entreprises/sirene/V3/siret/";
 
         HttpHeaders headers=new HttpHeaders();
@@ -59,12 +68,9 @@ public class SiretServiceImpl implements  SiretService{
         HttpEntity<String> entity=new HttpEntity<String>(headers);
 
         RestTemplate restTemplate = new RestTemplate();
-        for(String idSiret : siretIdList){
-            Siret result =  restTemplate.exchange(uri + idSiret, HttpMethod.GET,entity, Siret.class).getBody();
-            if(result != null){
-                this.create(result);
-            }
+        Siret result =  restTemplate.exchange(uri + idSiret, HttpMethod.GET,entity, Siret.class).getBody();
+        if(result != null){
+            this.create(result);
         }
-
     }
 }

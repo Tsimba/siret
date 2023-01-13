@@ -9,6 +9,6 @@ public interface SiretService {
     Siret create(Siret siret);
     List<Siret> saveListSiret(List<Siret> siretList);
 
-    void getSiretInfosAndStore();
+    void getSiretInfosAndStore(String idSiret);
 
 }

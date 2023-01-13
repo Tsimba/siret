@@ -4,7 +4,11 @@ import com.project.siret.data.domain_object.Siret;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Created by nicolas on 13/01/2023.
+ * Repository For Siret
+ *
+ * @author  Nicolas Razanatsimba
+ * @version 1.0
+ * @since   2023-01-13
  */
 public interface SiretReposotory extends JpaRepository<Siret, Integer> {
 }
