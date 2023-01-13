@@ -1,0 +1,10 @@
+/*******************************
+**
+**The step to run the project:
+**
+*******************************/
+1- Install the opendJDK 11
+2- Install Maven 3.8.6
+3- run mvn clean compile
+4- run mvn install
+5- mvn spring-boot:run
